@@ -12,6 +12,7 @@ RUN stack build --resolver lts-12.14 \
   turtle filepath file-embed aeson aeson-pretty containers directory bytestring  
 
 # Install nix
+SHELL ["/bin/bash", "-c"]
 ENV USER=ubuntu
 RUN curl https://nixos.org/nix/install | sh
 RUN source /home/ubuntu/.nix-profile/etc/profile.d/nix.sh
