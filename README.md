@@ -1,10 +1,15 @@
 # docker-haskell-lavello
 
-🚰 Kitchen-sink docker image for building Haskell in CI
+🚰 Kitchen-sink docker image for building (stack-based) Haskell projects in CI
 
 IPA: *//laˈvɛllo/*
 
 ![lavello](http://img.archiexpo.it/images_ae/photo-g/134-6497057.jpg)
+
+## Where to find this
+
+Docker tags:
+- lts-12: `nilrecurring/haskell-lavello:lts-12`
 
 ## FAQ
 
