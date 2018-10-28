@@ -2,6 +2,10 @@
 
 🚰 Kitchen-sink docker image for building Haskell in CI
 
+IPA: *//laˈvɛllo/*
+
+![lavello](http://img.archiexpo.it/images_ae/photo-g/134-6497057.jpg)
+
 ## FAQ
 
 > Wait, don't we have `fpco/stack-build` already?
