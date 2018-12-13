@@ -10,7 +10,9 @@ WORKDIR /home/ubuntu
 RUN stack build --resolver lts-12.21 \
   dhall-1.19.1 dhall-json-1.2.5 megaparsec-7.0.2 repline-0.2.0.0 serialise-0.2.1.0 \
   turtle filepath file-embed aeson aeson-pretty containers directory bytestring \
-  async process
+  http-client http-client-tls \
+  async process basement zlib tls transformers-base unliftio-core exceptions \
+  dotgen-0.4.2@sha256:309b7cc8a3593a8e48bee7b53020d5f72db156d58edf78a0214f58fbb84b292b
 
 # Install nix
 SHELL ["/bin/bash", "-c"]
