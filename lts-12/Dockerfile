@@ -8,11 +8,11 @@ WORKDIR /home/ubuntu
 
 # Build Haskell dependencies that we use
 RUN stack build --resolver lts-12.21 \
-  dhall-1.19.1 dhall-json-1.2.5 megaparsec-7.0.2 repline-0.2.0.0 serialise-0.2.1.0 \
-  turtle filepath file-embed aeson aeson-pretty containers directory bytestring \
-  http-client http-client-tls \
-  async process basement zlib tls transformers-base unliftio-core exceptions \
-  dotgen-0.4.2@sha256:309b7cc8a3593a8e48bee7b53020d5f72db156d58edf78a0214f58fbb84b292b
+  dhall-1.19.1 dhall-json-1.2.5 megaparsec-7.0.2 repline-0.2.0.0 serialise-0.2.1.0 dotgen-0.4.2 \
+  text turtle filepath file-embed aeson aeson-pretty containers dhall dhall-json \
+  bytestring prettyprinter async-pool process network-uri github versions lens \
+  safe fsnotify Glob async stm directory mtl exceptions unliftio \
+  http-client http-client-tls basement zlib tls transformers-base unliftio-core exceptions
 
 # Install nix
 SHELL ["/bin/bash", "-c"]
