@@ -8,14 +8,17 @@ WORKDIR /home/ubuntu
 
 # Build Haskell dependencies that we use
 RUN stack build --resolver lts-12.21 \
-  dhall-1.19.1 dhall-json-1.2.5 megaparsec-7.0.2 repline-0.2.0.0 serialise-0.2.1.0 dotgen-0.4.2 \
-  text turtle filepath file-embed aeson aeson-pretty containers dhall dhall-json \
-  bytestring prettyprinter async-pool process network-uri github versions lens \
+  dhall-1.21.0 dhall-json-1.2.7 megaparsec-7.0.3 repline-0.2.0.0 serialise-0.2.1.0 dotgen-0.4.2 cborg-json-0.2.1.0 versions-3.5.0 \
+  text turtle filepath file-embed aeson aeson-pretty containers \
+  bytestring prettyprinter async-pool process network-uri github lens \
   safe fsnotify Glob async stm directory mtl exceptions unliftio \
-  http-client http-client-tls basement zlib tls transformers-base unliftio-core exceptions
+  http-client http-client-tls basement zlib tls transformers-base unliftio-core
 
 # Install nix
+USER root
+RUN  mkdir -p /nix /etc/nix && chmod a+rwx /nix && echo 'sandbox = false' > /etc/nix/nix.conf
+USER ubuntu
 SHELL ["/bin/bash", "-c"]
 ENV USER=ubuntu
-RUN curl https://nixos.org/nix/install | sh
+RUN touch .bash_profile && curl https://nixos.org/releases/nix/nix-2.2.2/install | sh
 RUN source /home/ubuntu/.nix-profile/etc/profile.d/nix.sh
