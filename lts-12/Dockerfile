@@ -3,18 +3,17 @@ FROM fpco/stack-build:lts-12.21
 # Make new user, make it passwordless sudo
 RUN useradd -d /home/ubuntu -ms /bin/bash -g root -G sudo -p ubuntu ubuntu
 RUN echo "ubuntu ALL=(ALL:ALL) NOPASSWD: ALL" > /etc/sudoers.d/ubuntu
+RUN stack upgrade
 USER ubuntu
 WORKDIR /home/ubuntu
 
 # Build Haskell dependencies that we use
-RUN mkdir -p /home/ubuntu/.stack/global-project
-RUN printf "resolver: lts-12.21\nallow-newer: true\npackages: []" > /home/ubuntu/.stack/global-project/stack.yaml
-RUN stack setup
+ENV PATH="/home/ubuntu/.local/bin:${PATH}"
+RUN stack setup --resolver=lts-12.21
 #  Regenerate this list with:
 #  $ stack ls dependencies | grep -vE '^(spago|rts) ' | sed "s/ /-/g" | sed 's/\(^.*$\)/  \1 \\/g'
-RUN stack build Cabal
 RUN echo "allow-newer: true" > /home/ubuntu/.stack/config.yaml
-RUN stack build \
+RUN stack build --resolver=lts-12.21 \
   Cabal-2.2.0.1 \
   Diff-0.3.4 \
   Glob-0.10.0 \
@@ -64,7 +63,6 @@ RUN stack build \
   conduit-1.3.1 \
   conduit-extra-1.3.0 \
   connection-0.2.8 \
-  constraints-0.10.1 \
   containers-0.5.11.0 \
   contravariant-1.4.1 \
   cookie-0.4.4 \
@@ -82,7 +80,6 @@ RUN stack build \
   dotgen-0.4.2 \
   double-conversion-2.0.2.0 \
   either-5 \
-  enclosed-exceptions-1.0.3 \
   errors-2.3.0 \
   exceptions-0.10.2 \
   fail-4.9.0.0 \
@@ -98,7 +95,7 @@ RUN stack build \
   half-0.3 \
   hashable-1.2.7.0 \
   haskeline-0.7.4.3 \
-  hinotify-0.3.10 \
+  hfsevents-0.1.6 \
   hostname-1.0 \
   hourglass-0.2.12 \
   http-api-data-0.3.8.1 \
@@ -114,8 +111,6 @@ RUN stack build \
   kan-extensions-5.2 \
   keys-3.12.1 \
   lens-family-core-1.2.3 \
-  lifted-async-0.10.0.3 \
-  lifted-base-0.2.3.12 \
   managed-1.0.6 \
   math-functions-0.2.1.0 \
   megaparsec-7.0.3 \
@@ -156,7 +151,6 @@ RUN stack build \
   semigroups-0.18.5 \
   semver-range-0.2.8 \
   serialise-0.2.1.0 \
-  shelly-1.8.1 \
   socks-0.5.6 \
   split-0.2.3.3 \
   stm-2.4.5.1 \
